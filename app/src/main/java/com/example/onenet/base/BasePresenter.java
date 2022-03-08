@@ -1,8 +1,8 @@
 package com.example.onenet.base;
 
 public  abstract class BasePresenter<V extends BaseActivity,M extends BaseModel> {
-    private V  mView;
-    private M mModel;
+    protected V  mView;
+    protected M mModel;
     public  BasePresenter(){
         this.mModel=getModelInstance();
     }

@@ -3,12 +3,13 @@ package com.example.onenet.base;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 public  abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements View.OnClickListener {
 
-    private P mPresenter;
+    protected P mPresenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,6 +36,9 @@ public  abstract class BaseActivity<P extends BasePresenter> extends AppCompatAc
     //实例化P层
     protected abstract P getPresenterInstance();
 
+    //处理响应错误
+    protected abstract <ERROR extends Object> void responseError(ERROR error,Throwable throwable);
+
     //销毁不能在父类写 要告诉子类
     @Override
     protected void onDestroy() {
@@ -43,4 +47,8 @@ public  abstract class BaseActivity<P extends BasePresenter> extends AppCompatAc
     }
     //子类销毁方法
     protected abstract void destroy();
+
+//    private void findById(@IdRes int id){
+//         findViewById(id);
+//    }
 }
