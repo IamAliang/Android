@@ -1,6 +1,8 @@
 package com.example.onenet.base;
 
-public  abstract class BasePresenter<V extends BaseActivity,M extends BaseModel> {
+import com.example.onenet.supers.SuperBase;
+
+public  abstract class BasePresenter<V extends BaseActivity,M extends BaseModel,CONTRACT > extends SuperBase<CONTRACT> {
     protected V  mView;
     protected M mModel;
     public  BasePresenter(){
