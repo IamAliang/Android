@@ -7,7 +7,8 @@ import androidx.annotation.IdRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public  abstract class BaseActivity<P extends BasePresenter> extends AppCompatActivity implements View.OnClickListener {
+public  abstract class BaseActivity<P extends BasePresenter,CONTRACT> extends AppCompatActivity implements View.OnClickListener {
+    protected abstract CONTRACT getInstance();
 
     protected P mPresenter;
 

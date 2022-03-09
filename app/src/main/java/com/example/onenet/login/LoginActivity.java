@@ -9,11 +9,26 @@ import com.example.onenet.R;
 import com.example.onenet.base.BaseActivity;
 import com.example.onenet.base.BasePresenter;
 
-public class LoginActivity  extends BaseActivity<LoginPresenter> implements ILogin.VP{
+public class LoginActivity  extends BaseActivity<LoginPresenter,ILogin.VP>{
     private EditText etName;
     private EditText etPassword;
     private Button btnLogin;
 
+
+    @Override
+    protected ILogin.VP getInstance() {
+        return new ILogin.VP() {
+            @Override
+            public void requestLogin(String name, String psw) {
+                    mPresenter.getContract().requestLogin(name, psw);
+            }
+
+            @Override
+            public void responseLoginResult(boolean loginStatusResult) {
+                Toast.makeText(LoginActivity.this, loginStatusResult?"登录成功":"登录失败", Toast.LENGTH_SHORT).show();
+            }
+        };
+    }
 
     @Override
     protected void initData() {
@@ -57,12 +72,12 @@ public class LoginActivity  extends BaseActivity<LoginPresenter> implements ILog
     public void onClick(View v) {
         String name=etName.getText().toString();
         String psw=etPassword.getText().toString();
-        requestLogin(name,psw);
+       getInstance().requestLogin(name, psw);
     }
 
 
 
-    @Override
+   /* @Override
     public void requestLogin(String name, String psw) {
        mPresenter.requestLogin(name,psw);
     }
@@ -72,5 +87,5 @@ public class LoginActivity  extends BaseActivity<LoginPresenter> implements ILog
         Toast.makeText(this, loginStatusResult?"登录成功":"登录失败", Toast.LENGTH_SHORT).show();
 
 
-    }
+    }*/
 }
